@@ -9,6 +9,10 @@ import tests.base.BaseTest
 
 class AuthorizeTest : BaseTest() {
 
+
+    /**
+     * Before start test setup login and password in Config file
+     * */
     @Test
     fun authorize_and_add_to_favourites() {
         driver.navigate().to(LOGIN_PAGE)
