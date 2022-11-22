@@ -7,8 +7,8 @@ import tests.base.BaseTest
 
 class SearchCarTest : BaseTest() {
 
-    @Test
-    fun check_is_search_car() {
+    @Test(testName = "Filtering and checking the received data")
+    fun checkForSearchCar() {
         driver.navigate().to(AUTO_DROM_RU_PAGE)
 
         autoDromPage
@@ -16,16 +16,16 @@ class SearchCarTest : BaseTest() {
             .setBrandlName("Toyota")
             .setModelName("Harrier")
             .setFuel(Fuels.HYBRID)
-            .setMileageFrom(1)
+            .setMinMileage(1)
             .setMinYear(2007)
-            .setUnsold()
+            .setUnsoldCheckbox()
             .setPages(2)
             .clickToSearch()
             .checks(unsold = true, mileage = true, minYear = 2007)
     }
 
-    @Test
-    fun print_top_20() {
+    @Test(testName = "Print top 20 brands")
+    fun printTop20() {
         driver.navigate().to(AUTO_DROM_RU_PAGE)
 
         autoDromPage

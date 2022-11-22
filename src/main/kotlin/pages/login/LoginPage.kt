@@ -1,7 +1,9 @@
 package pages.login
 
+import common.Config.URLs.PERSONAL_PAGE
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
+import org.testng.Assert
 import pages.base.BasePage
 
 class LoginPage(driver: WebDriver) : BasePage(driver) {
@@ -34,6 +36,13 @@ class LoginPage(driver: WebDriver) : BasePage(driver) {
     fun clickToSignIn(): LoginPage {
         driver.findElement(signBtn).click()
         return this
+    }
+
+    /**
+     * Checking redirects to a personal page
+     * */
+    fun checkRedirectToPersonalPage() {
+        Assert.assertEquals(driver.currentUrl, PERSONAL_PAGE)
     }
 
 }

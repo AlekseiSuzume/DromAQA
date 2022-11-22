@@ -13,14 +13,15 @@ class AuthorizeTest : BaseTest() {
     /**
      * Before start test setup login and password in Config file
      * */
-    @Test
-    fun authorize_and_add_to_favourites() {
+    @Test(testName = "Authorize and add car to favourite")
+    fun authorizeAndAddToFavourites() {
         driver.navigate().to(LOGIN_PAGE)
 
         loginPage
             .setLogin(LOGIN)
             .setPassword(PASSWORD)
             .clickToSignIn()
+            .checkRedirectToPersonalPage()
 
         driver.navigate().to(AUTO_DROM_RU_PAGE)
 

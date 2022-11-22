@@ -80,7 +80,7 @@ class AutoDromPage(driver: WebDriver) : BasePage(driver) {
     /**
      * Set checkbox for search unsold cars
      * */
-    fun setUnsold(): AutoDromPage {
+    fun setUnsoldCheckbox(): AutoDromPage {
         val unsoldCheckbox = driver.findElement(unsoldCheckbox)
         unsoldCheckbox.click()
         return this
@@ -90,7 +90,7 @@ class AutoDromPage(driver: WebDriver) : BasePage(driver) {
      * Set the minimum mileage of the car
      * @param km = minimum mileage
      * */
-    fun setMileageFrom(km: Int): AutoDromPage {
+    fun setMinMileage(km: Int): AutoDromPage {
         driver.findElement(mileageFromInput).sendKeys("$km")
         return this
     }

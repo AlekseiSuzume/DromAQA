@@ -35,6 +35,7 @@ object Config {
         const val AUTO_DROM_RU_PAGE = "https://auto.drom.ru"
         const val LOGIN_PAGE = "https://my.drom.ru/sign"
         const val BOOKMARK_PAGE = "https://my.drom.ru/personal/bookmark"
+        const val PERSONAL_PAGE = "https://baza.drom.ru/personal/"
     }
 
     /**

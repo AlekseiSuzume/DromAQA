@@ -5,6 +5,7 @@ import common.Config.TimeVariables.IMPLICIT_WAIT
 import common.Config.TimeVariables.PAGE_LOAD_TIMEOUT
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.firefox.FirefoxDriver
 import org.testng.Assert
 import java.time.Duration
 
@@ -20,7 +21,7 @@ object CommonActions {
             }
             "FIREFOX" -> {
                 System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe")
-                driver = ChromeDriver()
+                driver = FirefoxDriver()
             }
             else -> Assert.fail("Incorrect browser name: $BROWSER")
         }
