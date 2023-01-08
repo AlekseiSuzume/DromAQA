@@ -1,9 +1,11 @@
 package tests.searchcars
 
+import common.Config
 import common.Config.URLs.AUTO_DROM_RU_PAGE
 import org.testng.annotations.Test
 import pages.autodrom.Fuels
 import tests.base.BaseTest
+import java.time.Duration
 
 class SearchCarTest : BaseTest() {
 
@@ -13,7 +15,7 @@ class SearchCarTest : BaseTest() {
 
         autoDromPage
             .setAdvancedFilter(true)
-            .setBrandlName("Toyota")
+            .setBrandName("Toyota")
             .setModelName("Harrier")
             .setFuel(Fuels.HYBRID)
             .setMinMileage(1)
@@ -26,6 +28,9 @@ class SearchCarTest : BaseTest() {
 
     @Test(testName = "Print top 20 brands")
     fun printTop20() {
+        driver.manage().timeouts()
+            .implicitlyWait(Duration.ofSeconds(Config.TimeVariables.IMPLICIT_WAIT))
+
         driver.navigate().to(AUTO_DROM_RU_PAGE)
 
         autoDromPage

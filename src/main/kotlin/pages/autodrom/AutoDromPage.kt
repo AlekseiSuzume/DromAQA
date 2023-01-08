@@ -40,36 +40,37 @@ class AutoDromPage(driver: WebDriver) : BasePage(driver) {
 
     /**
      * Set brand name for search
-     * @param brand = brand name
+     * @param brand brand name
      * */
-    fun setBrandlName(brand: String): AutoDromPage {
+    fun setBrandName(brand: String): AutoDromPage {
         driver.findElement(brandInput).apply {
             click()
             sendKeys(brand)
-            Thread.sleep(500)
-            sendKeys(Keys.ENTER)
+            waitElementToBeClickable(
+                findElement(By.xpath("//div[@aria-label='Марка']//child::div[contains(text(), '$brand')]"))
+            ).click()
         }
         return this
     }
 
     /**
      * Set model name for search
-     * @param model = model name
+     * @param model model name
      * */
     fun setModelName(model: String): AutoDromPage {
-        driver.findElement(modelInput).apply {
-            waitElementToBeClickable(this)
+        waitElementToBeClickable(driver.findElement(modelInput)).apply {
             click()
             sendKeys(model)
-            Thread.sleep(500)
-            sendKeys(Keys.ENTER)
+            waitElementToBeClickable(
+                findElement(By.xpath("//div[@aria-label='Модель']//child::div[contains(text(), '$model')]"))
+            ).click()
         }
         return this
     }
 
     /**
      * Set fuel type
-     * @param fuel = fuel type (pick from constants)
+     * @param fuel fuel type (pick from constants)
      * */
     fun setFuel(fuel: Fuels): AutoDromPage {
         driver.findElement(this.fuelInput).click()
@@ -88,7 +89,7 @@ class AutoDromPage(driver: WebDriver) : BasePage(driver) {
 
     /**
      * Set the minimum mileage of the car
-     * @param km = minimum mileage
+     * @param km minimum mileage
      * */
     fun setMinMileage(km: Int): AutoDromPage {
         driver.findElement(mileageFromInput).sendKeys("$km")
@@ -97,21 +98,22 @@ class AutoDromPage(driver: WebDriver) : BasePage(driver) {
 
     /**
      * Set the minimum year of manufacture of the car
-     * @param year = minimum year
+     * @param year minimum year
      * */
     fun setMinYear(year: Int): AutoDromPage {
         driver.findElement(minYearInput).apply {
             click()
             sendKeys("$year")
-            Thread.sleep(500)
-            sendKeys(Keys.ENTER)
+            waitElementToBeClickable(
+                findElement(By.xpath("//div[@aria-label='Год от']//child::div[contains(text(), '$year')]"))
+            ).click()
         }
         return this
     }
 
     /**
      * Set the number of pages to be checked
-     * @param value = number of pages (default value = 1)
+     * @param value number of pages (default value = 1)
      * */
     fun setPages(value: Int = 1): AutoDromPage {
         this.pages = value
@@ -120,9 +122,9 @@ class AutoDromPage(driver: WebDriver) : BasePage(driver) {
 
     /**
      * Select what to check:
-     * @param unsold - check for cars not sold out
-     * @param mileage - check for cars have mileage
-     * @param minYear - check for cars year manufactured >= set minimum year for search
+     * @param unsold check for cars not sold out
+     * @param mileage check for cars have mileage
+     * @param minYear check for cars year manufactured >= set minimum year for search
      * */
     fun checks(unsold: Boolean, mileage: Boolean, minYear: Int): AutoDromPage {
         for (i in 2..pages + 1) {
@@ -150,8 +152,12 @@ class AutoDromPage(driver: WebDriver) : BasePage(driver) {
      * Check for car not sold out
      * */
     private fun checkUnsold(element: WebElement) {
-        val actTextDecoration = element.getCssValue("textDecorationLine")
-        Assert.assertEquals(actTextDecoration, "none", "Fail in element: ${element.getAttribute("href")}")
+        var actTextDecoration = ""
+        val soldCarLocator = By.xpath(".//div[contains(@class, 'css-r91w5p')]")
+        if (isElementContains(element, soldCarLocator)) {
+            actTextDecoration = element.findElement(soldCarLocator).getCssValue("textDecorationLine")
+            Assert.assertEquals(actTextDecoration, "none", "Fail in element: ${element.getAttribute("href")}")
+        }
     }
 
     /**
@@ -166,16 +172,16 @@ class AutoDromPage(driver: WebDriver) : BasePage(driver) {
      * Check for car have mileage
      * */
     private fun checkMileage(element: WebElement) {
-        waitElementIsVisible(element.findElement(By.xpath(".//span[5]")))
+        waitElementToBeVisible(element.findElement(By.xpath(".//span[5]")))
     }
 
     /**
      * Select city for the search
-     * @param city = city name
+     * @param city city name
      * */
     fun setCity(city: String): AutoDromPage {
         driver.findElement(cityPicker).click()
-        driver.findElement(cityInput).sendKeys(city, Keys.ENTER)
+        waitElementToBeVisible(driver.findElement(cityInput)).sendKeys(city, Keys.ENTER)
         return this
     }
 

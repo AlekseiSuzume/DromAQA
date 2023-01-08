@@ -4,19 +4,15 @@ object Config {
 
     /**
      * Specify the browser for the tests:
-     * CHROME
-     * FIREFOX
+     * - CHROME
+     * - FIREFOX
      * */
     const val BROWSER = "CHROME"
 
     /**
-     * Time variables
+     * Start browser in headless mode
      * */
-    object TimeVariables {
-        const val IMPLICIT_WAIT = 5L
-        const val EXPLICIT_WAIT = 5L
-        const val PAGE_LOAD_TIMEOUT = 10L
-    }
+    const val HEADLESS_BROWSER = true
 
     /**
      *Close browser window after each test
@@ -29,7 +25,16 @@ object Config {
     const val CLEAR_COOKIES = true
 
     /**
-     * URLs for test
+     * Time variables
+     * */
+    object TimeVariables {
+        const val IMPLICIT_WAIT = 5L
+        const val EXPLICIT_WAIT = 5L
+        const val PAGE_LOAD_TIMEOUT = 10L
+    }
+
+    /**
+     * URLs for tests
      * */
     object URLs {
         const val AUTO_DROM_RU_PAGE = "https://auto.drom.ru"
