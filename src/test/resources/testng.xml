@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="All test suite">
-    <test verbose="2" preserve-order="true" parallel="classes" thread-count="2" name="SearchCar">
+    <test verbose="2" preserve-order="true" name="SearchCar">
         <classes>
             <class name="tests.searchcars.SearchCarTest"/>
             <class name="tests.authorize.AuthorizeTest"/>
