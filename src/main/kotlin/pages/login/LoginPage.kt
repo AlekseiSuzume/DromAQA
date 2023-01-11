@@ -14,7 +14,7 @@ class LoginPage(driver: WebDriver) : BasePage(driver) {
 
     /**
      * Entering a login for authorization
-     * @param login = phone number, email or login
+     * @param login phone number, email or login
      * */
     fun setLogin(login: String): LoginPage {
         driver.findElement(this.login).sendKeys(login)
@@ -23,7 +23,7 @@ class LoginPage(driver: WebDriver) : BasePage(driver) {
 
     /**
      * Entering a password for authorization
-     * @param password = password
+     * @param password password
      * */
     fun setPassword(password: String): LoginPage {
         driver.findElement(this.password).sendKeys(password)
